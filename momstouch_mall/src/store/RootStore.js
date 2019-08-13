@@ -3,6 +3,7 @@ import MenuStore from './MenuStroe'
 import AuthStore from './AuthStore';
 import UserStore from './UserStore';
 import CartStore from './CartStore';
+import HttpService from './HttpService';
 
 export default class RootStore {
     constructor() {
@@ -12,5 +13,6 @@ export default class RootStore {
         this.authStore = new AuthStore(this);
         this.userStore = new UserStore(this);
         this.cartStore = new CartStore(this);
+        this.httpService = new HttpService(this);
     }
 }

@@ -5,6 +5,7 @@ import { inject, observer } from 'mobx-react';
 @observer
 class Detail extends React.Component {
 
+
     componentDidMount() {   
         this.props.rootStore.goodStore.getGoods(this.props.match.params.goodsId);
     }
