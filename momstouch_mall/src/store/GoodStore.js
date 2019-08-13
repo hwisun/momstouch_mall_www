@@ -3,6 +3,8 @@ import Axios from 'axios'
 
 export default class goodStore {
     @observable goodsList = [];
+    @observable goods = [];
+    @observable myGoodsList = [];
 
     constructor(rootStore) {
         this.rootStore = rootStore;
@@ -11,7 +13,6 @@ export default class goodStore {
     @action
     getGoodsList(menuId) {
         console.log('getGoodsList');
-        console.log(menuId);
         
         let URL = this.rootStore.BASE_URL +'/goods/';
         if (menuId) {
@@ -21,6 +22,62 @@ export default class goodStore {
             URL
         ).then(response => {
             this.goodsList = response.data;
+        })
+    }
+
+    @action
+    getGoods(goodsId) {
+        console.log('getGoods');
+
+        let URL = this.rootStore.BASE_URL + '/goods/' + goodsId+'/';
+        Axios.get(
+            URL
+        ).then(response => {
+            this.goods = response.data;
+            //console.log(response.data);
+            
+        })
+    }
+
+    @action
+    getMyGoods() {
+        let URL = this.rootStore.BASE_URL + '/me/goods/';
+        Axios.get(
+            URL,
+            {
+                headers: {
+                    'Authorization': this.rootStore.authStore.authToken
+                }
+            }
+        )
+            .then(response => {
+                console.log(response.data);
+                this.myGoodsList = response.data;
+            });
+    }
+
+    @action
+    onPurchase() {
+        const goods = [];
+        let URL = this.rootStore.BASE_URL + '/goods/purchase/';
+        goods.push({
+            goods_id: this.goods.id,
+            count: 1
+        })
+        Axios.post(
+            URL,
+            {
+                goods
+            },
+            {
+                headers: {
+                    'Authorization': this.rootStore.authStore.authToken
+                }
+            }
+        ).then((response) => {
+            console.log('Ok');
+        }).catch((error) => {
+            console.log(error);
         })
     }
 }
