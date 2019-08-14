@@ -2,17 +2,28 @@ import React from 'react'
 import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router-dom';
 
-@inject('rootStore')
+@inject('rootStore','httpService')
 @observer
 class Sidebar extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = ({
+            menu: []
+        })
+    }
+
     componentDidMount() {
-        this.props.rootStore.menuStore.getMenuList()
+        this.props.httpService.getMenu()
+        .then(menu => {
+            this.setState({
+                menu
+            })
+        })
     }
 
     render() {
-        const menuList = this.props.rootStore.menuStore.menuList;
-        const list = menuList.map(menu => {
+        const list = this.state.menu.map(menu => {
             return (
                 <div key={menu.id} className=''>
                     <Link to={'/menu/'+menu.id}>{menu.title}</Link>

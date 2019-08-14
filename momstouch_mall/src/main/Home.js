@@ -4,30 +4,46 @@ import { inject, observer } from 'mobx-react';
 import Sidebar from './Sidebar';
 import ListBox from './ListBox';
 
-@inject('rootStore')
+@inject('rootStore', 'httpService')
 @observer
 class Home extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = ({
+            goods: []
+        })
+    }
+
     componentDidUpdate(prevProps) {
         if (this.props.match.params.menuId !== prevProps.match.params.menuId) {
-            this.props.rootStore.goodStore.getGoodsList(this.props.match.params.menuId);
+            this.props.httpService.indexGoods(this.props.match.params.menuId)
+                .then(goods => {
+                    this.setState({
+                        goods
+                    })
+                })
         }
     }
 
     componentDidMount() {
-        this.props.rootStore.goodStore.getGoodsList(this.props.match.params.menuId);
+        this.props.httpService.indexGoods(this.props.match.params.menuId)
+            .then(goods => {
+                this.setState({
+                    goods
+                })
+            })
     }
-    
+
     render() {
-        const goodsList = this.props.rootStore.goodStore.goodsList;
-        const list = goodsList.map(goods => {
-            return(
-                <ListBox key={goods.id} goods={goods}/>
+        // const goodsList = this.props.rootStore.goodStore.goodsList;
+        const list = this.state.goods.map(goods => {
+            return (
+                <ListBox key={goods.id} goods={goods} />
             )
         })
-        console.log(goodsList);
-        
-        return(
+
+        return (
             <div>
                 <Sidebar />
                 <div id='content'>

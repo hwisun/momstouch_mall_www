@@ -70,6 +70,13 @@ class HttpService {
         });
     }
 
+    getGoods(goodId) {
+        return Axios.get('/goods/' + goodId + '/')
+            .then(response => {
+                return response.data;
+            })
+    }
+
     getMe() {
         return Axios.get('/me/')
             .then(response => {
@@ -77,8 +84,14 @@ class HttpService {
             })
     }
 
-    indexGoods() {
-        return Axios.get('/items/')
+    getMenu() {
+        return Axios.get('/menus/').then(response => {
+            return response.data;
+        })
+    }
+
+    indexGoods(menuId) {
+        return Axios.get(menuId ? '/menus/' + menuId + '/goods/' : '/goods/')
             .then(response => {
                 return response.data;
             })
@@ -89,6 +102,45 @@ class HttpService {
             .then(response => {
                 return response.data;
             })
+    }
+
+    login(username, password) {
+        Axios.post('/o/token/',
+            {
+                grant_type: 'password',
+                client_id: this.clientId,
+                username,
+                password
+            }
+        ).then((response) => {
+            const token = response.data;
+            this.rootStore.authStore.setToken(token);
+            this.rootStore.userStore.setUser()
+            this.rootStore.history.push('/');
+            return token
+        })
+    }
+
+    purchase(goodsList) {
+        const goods = []
+        if (goodsList.id) {
+            goods.push({
+                goods_id: goodsList.id,
+                count: 1
+            })
+        } else {
+            console.log(goodsList);
+            for (let good of goodsList) {
+                goods.push({
+                    goods_id: good.goods.id,
+                    count: good.count
+                })
+            }
+        }
+        return Axios.post('/goods/purchase/', { goods }).then((response) => {
+            this.rootStore.history.push('/mygoods');
+            return response.data;
+        })
     }
 
     refreshToken() {

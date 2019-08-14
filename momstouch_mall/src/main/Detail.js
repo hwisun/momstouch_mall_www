@@ -1,25 +1,37 @@
 import React from 'react'
 import { inject, observer } from 'mobx-react';
 
-@inject('rootStore')
+@inject('rootStore', 'httpService')
 @observer
 class Detail extends React.Component {
+    
+    constructor(props) {
+        super(props);
+        this.state = ({
+            goods: []
+        })
+    }
 
 
     componentDidMount() {   
-        this.props.rootStore.goodStore.getGoods(this.props.match.params.goodsId);
+        this.props.httpService.getGoods(this.props.match.params.goodsId)
+        .then(goods => {
+            this.setState({
+                goods
+            })
+        });
     }
 
     onPurchase = () => {
-        this.props.rootStore.goodStore.onPurchase();
+        this.props.httpService.purchase(this.state.goods);
     }
 
     onToCart = () => {
-        this.props.rootStore.cartStore.addGoodsToCart(this.props.rootStore.goodStore.goods)
+        this.props.rootStore.cartStore.addGoodsToCart(this.state.goods)
     }
 
     render() {
-        const { desc, id, image, menu, price, title } = this.props.rootStore.goodStore.goods ? this.props.rootStore.goodStore.goods : null;
+        const { desc, id, image, menu, price, title } = this.state.goods ? this.state.goods : null;
         
         return (
             <div>

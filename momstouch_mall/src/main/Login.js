@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 import { inject } from 'mobx-react';
 
-@inject('rootStore')
+@inject('rootStore', 'httpService')
 class Login extends Component {
 
     constructor(props) {
@@ -29,21 +29,7 @@ class Login extends Component {
     }
 
     onLogin = () => {
-        const { rootStore, history } = this.props
-        Axios.post(
-            rootStore.BASE_URL + '/o/token/',
-            {
-                grant_type: 'password',
-                client_id: 'YYvIjmLiRcvrikzjrlIAfQbKurCZdYoxIIDELPxm',
-                username: this.state.username,
-                password: this.state.password
-            }
-        ).then((response) => {
-            const token = response.data;
-            rootStore.authStore.setToken(token);
-            rootStore.userStore.setUser()
-            history.push('/');
-        })
+        this.props.httpService.login(this.state.username, this.state.password)
     }
 
     render() {
