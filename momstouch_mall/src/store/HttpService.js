@@ -66,6 +66,7 @@ class HttpService {
                     })
                 }
             }
+            return Promise.reject(originalError);
         });
     }
 
