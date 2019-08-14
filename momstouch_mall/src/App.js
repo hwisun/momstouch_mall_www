@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import React from 'react';
 
 import './App.css';
@@ -14,7 +14,6 @@ import PromiseTest from './promise/PromiseTest';
 
 function App() {
   return (
-    <Router>
       <div id='container'>
       <Header />
       <Switch>
@@ -28,7 +27,6 @@ function App() {
       </Switch>
       <Footer />
       </div>
-    </Router>
   );
 }
 

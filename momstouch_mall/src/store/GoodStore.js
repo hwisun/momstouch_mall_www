@@ -51,7 +51,6 @@ export default class goodStore {
             }
         )
             .then(response => {
-                console.log(response.data);
                 this.myGoodsList = response.data;
             });
     }
@@ -75,7 +74,7 @@ export default class goodStore {
                 }
             }
         ).then((response) => {
-            console.log('Ok');
+            this.rootStore.history.push('/mygoods')
         }).catch((error) => {
             console.log(error);
         })

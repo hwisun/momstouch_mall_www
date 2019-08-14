@@ -4,9 +4,11 @@ import AuthStore from './AuthStore';
 import UserStore from './UserStore';
 import CartStore from './CartStore';
 import HttpService from './HttpService';
+import { createBrowserHistory } from 'history'
 
 export default class RootStore {
     constructor() {
+        this.history = createBrowserHistory();
         this.BASE_URL = 'http://localhost:8007';
         this.goodStore = new GoodStore(this);
         this.menuStore = new MenuStore(this);
