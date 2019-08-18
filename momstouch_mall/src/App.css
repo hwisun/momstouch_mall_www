@@ -66,3 +66,38 @@ footer {
   padding: 20px;
   border: 1px solid #bcbcbc;
 }
+
+.detail {
+  width: 100%;
+  overflow: hidden;
+}
+
+.menu {
+  width: 50px;
+  text-align: center;
+  border-top: 2px solid brown;
+  border-left: 1px solid #bcbcbc;
+  margin-bottom: 5px;
+}
+
+.area {
+  width: 100%;
+}
+
+.area textarea{
+  margin-left: 5px;
+  width: 89%;
+  height: 50px;
+}
+
+.area button {
+  width: 10%;
+  height: 55px;
+}
+
+.comment {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #bcbcbc;
+  overflow: hidden;
+}

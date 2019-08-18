@@ -104,6 +104,14 @@ class HttpService {
             })
     }
 
+    indexReview(goodsId) {
+        console.log(goodsId);
+        return Axios.get('/comment/goods/', { goodsId })
+            .then(response => {
+                return response.data;
+            })
+    }
+
     login(username, password) {
         Axios.post('/o/token/',
             {
@@ -114,8 +122,7 @@ class HttpService {
             }
         ).then((response) => {
             const token = response.data;
-            this.rootStore.authStore.setToken(token);
-            this.rootStore.userStore.setUser()
+            this.rootStore.authStore.setToken(token);   
             this.rootStore.history.push('/');
             return token
         })

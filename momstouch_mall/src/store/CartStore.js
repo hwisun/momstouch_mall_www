@@ -36,30 +36,6 @@ export default class CartStore {
 
     @action
     purchaseCartGoods() {
-        // const goods = [];
-        // let URL = this.rootStore.BASE_URL + '/goods/purchase/';
-        // for (let good of this.cartGoods) {
-        //     goods.push({
-        //         goods_id: good.goods.id,
-        //         count: good.count
-        //     })
-        // }
-        // Axios.post(
-        //     URL,
-        //     {
-        //         goods
-        //     },
-        //     {
-        //         headers: {
-        //             'Authorization': this.rootStore.authStore.authToken
-        //         }
-        //     }
-        // ).then((response) => {
-        //     this.clearCartGoods();
-        // }).catch((error) => {
-        //     console.log(error);
-        // })
-
         this.rootStore.httpService.purchase(this.cartGoods)
         .then(response => {
             this.clearCartGoods();
