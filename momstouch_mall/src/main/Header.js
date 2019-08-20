@@ -13,16 +13,17 @@ class Header extends React.Component {
             <header>
                 <div className='left'><Link to='/'>Home</Link></div>
                 {this.props.rootStore.authStore.isLoggedIn ?
-                    <div className='right'><Link to='#' onClick={this.onLogout}>logout</Link></div> :
-                    <div className='right'><Link to='/login'>Login</Link></div>
-                }
-                {this.props.rootStore.authStore.isLoggedIn ?
-                    <div className='right'><Link to='/mygoods'>MyGoods</Link></div> :
-                    <div className='right'><Link to='/Register'>Register</Link></div>
-                }
-                {this.props.rootStore.authStore.isLoggedIn ?
-                    <div className='right'><Link to='/mycart'>MyCart</Link></div> :
-                    null
+                    <div>
+                        <div className='right'><Link to='#' onClick={this.onLogout}>logout</Link></div>
+                        <div className='right'><Link to='/mygoods'>MyGoods</Link></div>
+                        <div className='right'><Link to='/mycart'>MyCart</Link></div>
+                        <div className='right'><Link to='/myhistory'>MyHistory</Link></div>
+                    </div>
+                     :
+                     <div>
+                        <div className='right'><Link to='/login'>Login</Link></div>
+                        <div className='right'><Link to='/Register'>Register</Link></div>
+                     </div>
                 }
             </header>
         )

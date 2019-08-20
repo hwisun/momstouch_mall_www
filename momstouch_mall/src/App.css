@@ -101,3 +101,7 @@ footer {
   border: 1px solid #bcbcbc;
   overflow: hidden;
 }
+
+.history-container {
+  overflow: hidden;
+}

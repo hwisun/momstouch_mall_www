@@ -93,7 +93,7 @@ class HttpService {
     indexGoods(menuId) {
         return Axios.get(menuId ? '/menus/' + menuId + '/goods/' : '/goods/')
             .then(response => {
-                return response.data;
+                return response.data
             })
     }
 
@@ -107,6 +107,13 @@ class HttpService {
     indexReview(goodsId) {
         console.log(goodsId);
         return Axios.get('/comment/goods/', { goodsId })
+            .then(response => {
+                return response.data;
+            })
+    }
+
+    indexHistory() {
+        return Axios.get('/history/')
             .then(response => {
                 return response.data;
             })
@@ -146,6 +153,13 @@ class HttpService {
         }
         return Axios.post('/goods/purchase/', { goods }).then((response) => {
             this.rootStore.history.push('/mygoods');
+            return response.data;
+        })
+    }
+
+    refundHistory(historyId) {
+        return Axios.post('/history/' + historyId + '/refund/')
+        .then(response => {
             return response.data;
         })
     }
