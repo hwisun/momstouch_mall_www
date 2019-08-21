@@ -90,6 +90,22 @@ class HttpService {
         })
     }
 
+    addReview(user_id, goods_id, comment) {
+        console.log(user_id, goods_id, comment);
+        
+        const list = []
+        list.push({
+            user_id,
+            goods: goods_id, 
+            comment,
+            grade: 5
+        })
+        return Axios.post('/comment/', { list }).then((response) => {
+            this.rootStore.history.push('/mygoods');
+            return response.data;
+        })
+    }
+
     indexGoods(menuId) {
         return Axios.get(menuId ? '/menus/' + menuId + '/goods/' : '/goods/')
             .then(response => {
@@ -118,6 +134,14 @@ class HttpService {
                 return response.data;
             })
     }
+
+    indexTagGoods(tag) {
+        return Axios.get('/tags/' + tag + '/goods/')
+            .then(response => {
+                return response.data;
+            });
+    }
+
 
     login(username, password) {
         Axios.post('/o/token/',

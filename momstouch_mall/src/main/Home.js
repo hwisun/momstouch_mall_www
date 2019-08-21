@@ -38,9 +38,16 @@ class Home extends React.Component {
     render() {
         // const goodsList = this.props.rootStore.goodStore.goodsList;
         const list = this.state.goods.map(goods => {
-            return (
-                <ListBox key={goods.goods.id} goods={goods.goods} />
-            )
+            if (goods.goods) {
+                return (
+                    <ListBox key={goods.goods.id} goods={goods.goods} />
+                )
+            } else {
+                return (
+                    <ListBox key={goods.id} goods={goods} />
+                )
+            }
+            
         })
 
         return (

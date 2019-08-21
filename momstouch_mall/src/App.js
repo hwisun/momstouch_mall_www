@@ -12,6 +12,7 @@ import MyGoods from './main/MyGoods';
 import MyCart from './main/MyCart';
 import PromiseTest from './promise/PromiseTest';
 import MyHistory from './main/MyHistory';
+import TagGoods from './main/TagGoods';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route exact path='/mygoods' component={MyGoods} />
         <Route exact path='/mycart' component={MyCart} />
         <Route exact path='/myhistory' component={MyHistory} />
+        <Route exact path="/tags/:tag" component={TagGoods} />
         <Route exact path='/login' component={Login} />
         <Route exact path='/promise-test' component={PromiseTest} />
       </Switch>

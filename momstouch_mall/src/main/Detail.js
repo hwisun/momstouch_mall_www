@@ -60,10 +60,11 @@ class Detail extends React.Component {
 
 
     render() {
-        const { desc, id, image, menu, price, title } = this.state.goods ? this.state.goods : null;
-        console.log(this.state.reviews);
+        const { id, desc, image, menu, price, title, comment } = this.state.goods ? this.state.goods : null;
+        console.log(comment);
+         
         
-        const reviewList = this.state.reviews.map(review => {
+        const commentList = comment? comment.map(review => {
             return (
                 <div>
                     <div className='comment'>
@@ -71,7 +72,7 @@ class Detail extends React.Component {
                     </div>
                 </div>
             )
-        })
+        }) : null
 
         return (
             <div>
@@ -96,7 +97,7 @@ class Detail extends React.Component {
                             onChange={this.onInputChanged}></textarea>
                     </div>
                 </div>
-                {reviewList}
+                {commentList}
             </div>
         )
     }

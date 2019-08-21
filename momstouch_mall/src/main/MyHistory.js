@@ -14,6 +14,7 @@ class MyHistory extends React.Component {
 
     componentDidMount() {
         this.indexHistory();
+
     }
 
     indexHistory() {

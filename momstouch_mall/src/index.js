@@ -14,7 +14,8 @@ ReactDOM.render(
     <Router history={rootStore.history}>
         <Provider
             rootStore={rootStore}
-            httpService={rootStore.httpService}>
+            httpService={rootStore.httpService}
+            history={rootStore.history} >
             <App />
         </Provider>
     </Router>,
