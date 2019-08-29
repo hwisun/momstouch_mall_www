@@ -6,7 +6,7 @@ class HttpService {
     constructor(rootStore) {
         this.rootStore = rootStore;
         this.authStore = rootStore.authStore;
-        this.clientId = 'YYvIjmLiRcvrikzjrlIAfQbKurCZdYoxIIDELPxm'
+        this.clientId = '5AUZXgv1ASgDjV8NDU5oY22cQU9avCw1MT0G0GLn'
 
         this.refreshSubscribers = [];
         this.isRefreshingToken = false
