@@ -12,7 +12,7 @@ class HttpService {
         this.isRefreshingToken = false
 
 
-        Axios.defaults.baseURL = 'http://localhost:8007';
+        Axios.defaults.baseURL = 'https://api.momstouch.jeonghs.kr';
         Axios.defaults.headers.common['Authorization'] = this.authStore.authToken
 
         reaction(() => this.authStore.authToken, () => {
